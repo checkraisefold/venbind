@@ -12,6 +12,7 @@
     libclang
     pkg-config
     wayland
+    ninja
   ];
   env.LIBCLANG_PATH="${pkgs.libclang.lib}/lib";
   enterShell = ''
