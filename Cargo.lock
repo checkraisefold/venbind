@@ -1451,6 +1451,7 @@ name = "venbind"
 version = "0.0.2"
 dependencies = [
  "ashpd",
+ "cmake",
  "futures",
  "napi",
  "napi-build",

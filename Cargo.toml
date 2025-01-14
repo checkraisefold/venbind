@@ -27,3 +27,4 @@ members = ["./uiohook-sys"]
 
 [build-dependencies]
 napi-build = { version = "2", optional = true }
+cmake = "0.1"
