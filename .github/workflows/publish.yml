@@ -17,6 +17,7 @@ jobs:
           - os: windows
             target_suffix: -pc-windows-gnu
             output: venbind.dll
+            build_args: --cross-compile
         arch: [x86_64]
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +33,7 @@ jobs:
       - name: Build
         shell: devenv shell bash -- -e {0}
         run: |
-          cargo build --release --target ${{ matrix.arch }}${{ matrix.platform.target_suffix }}
+          npx --yes napi build --target ${{ matrix.arch }}${{ matrix.platform.target_suffix }} ${{ matrix.platform.build_args }}
           mkdir dist
           cp ./target/${{ matrix.arch }}${{ matrix.platform.target_suffix }}/release/${{ matrix.platform.output }} ./dist/venbind-${{ matrix.platform.os }}-${{ matrix.arch }}.node
       - name: Upload
