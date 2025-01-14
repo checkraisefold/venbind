@@ -9,13 +9,11 @@ fn main() {
         .define("CMAKE_INSTALL_LIBDIR", "lib")
         .build();
     println!("cargo:rustc-link-search=native={}/lib", dst.display());
-    #[cfg(target_os = "windows")]
-    {
+    if std::env::var_os("CARGO_CFG_WINDOWS").is_some() {
         println!("cargo:rustc-link-lib=user32");
     }
     println!("cargo:rustc-link-lib=static=uiohook");
-    #[cfg(target_os = "linux")]
-    {
+    if std::env::var_os("CARGO_CFG_UNIX").is_some() {
         println!("cargo:rustc-link-lib=X11");
         println!("cargo:rustc-link-lib=xcb");
         println!("cargo:rustc-link-lib=X11-xcb");
@@ -32,8 +30,8 @@ fn main() {
     bindings
         .write_to_file(out_path.join("bindings.rs"))
         .expect("Couldn't write bindings!");
-    #[cfg(target_os = "linux")]
-    {
+
+    if std::env::var_os("CARGO_CFG_UNIX").is_some() {
         let bindings_linux = bindgen::Builder::default()
             .header("vendor/src/x11/input_helper.h")
             .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
@@ -43,8 +41,7 @@ fn main() {
             .write_to_file(out_path.join("linux_helper_bindings.rs"))
             .expect("Couldn't write bindings!");
     }
-    #[cfg(target_os = "windows")]
-    {
+    if std::env::var_os("CARGO_CFG_WINDOWS").is_some() {
         let bindings_windows = bindgen::Builder::default()
             .header("vendor/src/windows/input_helper.h")
             .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
