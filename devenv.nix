@@ -13,6 +13,7 @@
     pkg-config
     wayland
     ninja
+    llvmPackages_latest.llvm
   ];
   env.LIBCLANG_PATH="${pkgs.libclang.lib}/lib";
   enterShell = ''
