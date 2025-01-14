@@ -34,7 +34,7 @@ jobs:
         shell: devenv shell bash -- -e {0}
         run: |
           ${{ matrix.platform.prebuild_command }}
-          npx --yes --package=@napi-rs/cli@3 -- build --cross-compile --target ${{ matrix.arch }}${{ matrix.platform.target_suffix }}
+          npx --yes --package=@napi-rs/cli@canary -- build --cross-compile --target ${{ matrix.arch }}${{ matrix.platform.target_suffix }}
           mkdir dist
           cp index.node ./dist/venbind-${{ matrix.platform.os }}-${{ matrix.arch }}.node
       - name: Upload
