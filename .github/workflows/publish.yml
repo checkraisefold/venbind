@@ -13,10 +13,8 @@ jobs:
         platform:
           - os: linux
             target_suffix: -unknown-linux-gnu
-            output: libvenbind.so
           - os: windows
             target_suffix: -pc-windows-gnu
-            output: venbind.dll
             prebuild_command: cargo install cargo-xwin
         arch: [x86_64]
     runs-on: ubuntu-latest
@@ -34,7 +32,7 @@ jobs:
         shell: devenv shell bash -- -e {0}
         run: |
           ${{ matrix.platform.prebuild_command }}
-          npx --yes --package=@napi-rs/cli@canary -- build --cross-compile --target ${{ matrix.arch }}${{ matrix.platform.target_suffix }}
+          npx --yes --package=@napi-rs/cli@canary -- napi build --release --cross-compile --target ${{ matrix.arch }}${{ matrix.platform.target_suffix }}
           mkdir dist
           cp index.node ./dist/venbind-${{ matrix.platform.os }}-${{ matrix.arch }}.node
       - name: Upload
