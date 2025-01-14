@@ -17,7 +17,6 @@ jobs:
           - os: windows
             target_suffix: -pc-windows-gnu
             output: venbind.dll
-            build_args: --cross-compile
         arch: [x86_64]
     runs-on: ubuntu-latest
     steps:
