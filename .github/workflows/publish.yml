@@ -32,6 +32,7 @@ jobs:
       - name: Build
         shell: devenv shell bash -- -e {0}
         run: |
+          cargo install cargo-xwin
           npx --yes @napi-rs/cli build --target ${{ matrix.arch }}${{ matrix.platform.target_suffix }} ${{ matrix.platform.build_args }}
           mkdir dist
           cp ./target/${{ matrix.arch }}${{ matrix.platform.target_suffix }}/release/${{ matrix.platform.output }} ./dist/venbind-${{ matrix.platform.os }}-${{ matrix.arch }}.node
