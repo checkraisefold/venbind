@@ -14,7 +14,7 @@ jobs:
           - os: linux
             target_suffix: -unknown-linux-gnu
           - os: windows
-            target_suffix: -pc-windows-gnu
+            target_suffix: -pc-windows-msvc
             prebuild_command: cargo install cargo-xwin
         arch: [x86_64]
     runs-on: ubuntu-latest
